@@ -3,8 +3,8 @@ import aiohttp
 import argparse
 import asyncio
 from multiprocessing import Process
+from threading import Thread
 import time
-import threading
 import requests
 
 
@@ -16,7 +16,7 @@ def default(url_list):
 def use_threads(url_list):
     threads = list()
     for url in url_list:
-        thread = threading.Thread(target=download, args=[url])
+        thread = Thread(target=download, args=[url])
         threads.append(thread)
         thread.start()
     for thread in threads:
@@ -96,4 +96,4 @@ if __name__ == "__main__":
         args.mode(url_list)
 
     end_time = time.time() - prog_time
-    print(f"Execute time:  {end_time:.4f} sec.")
+    print(f"Execute time:  {end_time:.2f} sec.")
